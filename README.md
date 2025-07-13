@@ -24,7 +24,7 @@
 
 ## 🔗 Live Preview
 
-> 🚀 [https://your-vercel-app.vercel.app](https://your-vercel-app.vercel.app)
+> 🚀 [https://your-vercel-app.vercel.app](https://custom-twitter.vercel.app/)
 
 ---
 
