@@ -32,19 +32,19 @@ function Tweet() {
   };
 
   return tweet ? (
-    <div className="py-8">
+    <div className="py-8 px-4">
       <Container>
-        <div className="w-full flex flex-col lg:flex-row justify-center mb-4 relative border rounded-xl p-2">
+        <div className="w-full flex flex-col lg:flex-row justify-center mb-4 relative border rounded-xl p-4 bg-white shadow-sm">
           {tweet.images && (
             <img
               src={databaseService.getFileURL(tweet.images)}
               alt={tweet.title}
-              className="rounded-xl max-w-full h-auto"
+              className="rounded-xl w-full max-w-2xl h-auto object-cover mx-auto mb-4"
             />
           )}
 
           {isAuthor && (
-            <div className="absolute right-6 top-6 flex gap-2">
+            <div className="absolute right-4 top-4 flex flex-wrap gap-2 sm:flex-nowrap">
               <Link to={`/edit-tweet/${tweet.$id}`}>
                 <Button bgColor="bg-green-500">Edit</Button>
               </Link>
@@ -55,14 +55,15 @@ function Tweet() {
           )}
         </div>
 
-        <div className="w-full mb-6">
-          <h1 className="text-2xl font-bold">{tweet.title}</h1>
+        <div className="w-full max-w-2xl mx-auto mb-6">
+          <h1 className="text-2xl font-bold text-gray-800">{tweet.title}</h1>
         </div>
 
-        <div className="text-sm text-gray-700">
-  {tweet.title}
-</div>
-
+        {tweet.content && (
+          <div className="text-sm text-gray-700 leading-relaxed max-w-2xl mx-auto">
+            {parse(tweet.content)}
+          </div>
+        )}
       </Container>
     </div>
   ) : null;

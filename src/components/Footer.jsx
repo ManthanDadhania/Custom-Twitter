@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Search } from 'lucide-react';
 import profileService from '../appwrite/profileService';
-import '../index.css';
 
 function Footer() {
   const [quote, setQuote] = useState('');
@@ -13,11 +12,7 @@ function Footer() {
     "Creativity is intelligence having fun.",
     "Push yourself, not just code.",
     "Great things take time to compile.",
-    "Debugging is like being the detective of a crime you committed."
-  ];
-
-  const trends = [
-    "#React", "#JavaScript", "#AI", "#OpenSource", "#TailwindCSS"
+    "Debugging is like being the detective of a crime you committed.",
   ];
 
   useEffect(() => {
@@ -28,9 +23,9 @@ function Footer() {
   }, []);
 
   return (
-    <div className="relative">
-      <aside className="fixed right-0 top-0 h-screen w-[300px] p-4 border-l border-gray-200 bg-white overflow-hidden shadow-inner z-10 hidden sm:flex flex-col">
-
+    <>
+      {/* ✅ Desktop Sidebar */}
+      <aside className="hidden sm:flex fixed right-0 top-0 h-screen w-[300px] p-4 border-l border-gray-200 bg-white overflow-y-auto shadow-inner z-10 flex-col">
         {/* Search */}
         <div className="relative mb-6">
           <input
@@ -41,7 +36,7 @@ function Footer() {
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
         </div>
 
-        {/* Clock & Quote */}
+        {/* Time & Quote */}
         <div className="text-center">
           <p className="text-sm text-gray-500">🕒 {time.toLocaleTimeString()}</p>
           <p className="text-xs text-gray-400">{time.toDateString()}</p>
@@ -54,41 +49,39 @@ function Footer() {
         <div className="mt-6">
           <h3 className="text-gray-800 font-semibold mb-3">🔥 Trending Topics</h3>
           <ul className="space-y-3 text-sm text-gray-700">
-            {trends.map((t, i) => (
+            {['#React', '#JavaScript', '#AI', '#OpenSource', '#TailwindCSS'].map((t, i) => (
               <li key={i} className="hover:underline cursor-pointer">{t}</li>
             ))}
           </ul>
         </div>
 
         {/* Top Users */}
-        {/* Top Users */} 
-<div className="mt-6">
-  <h3 className="text-gray-800 font-semibold mb-3">👥 People With Most Tweets</h3>
-  <ul className="space-y-4">
-    {topUsers.map((user, i) => (
-      <li key={i} className="flex items-center gap-3">
-        {user.profileImage ? (
-          <img
-            src={profileService.getFileURL(user.profileImage)}
-            alt={user.username}
-            className="w-10 h-10 rounded-full object-cover"
-          />
-        ) : (
-          <div className="w-10 h-10 bg-gray-300 rounded-full flex items-center justify-center font-bold text-white">
-            {user.username?.charAt(0).toUpperCase()}
-          </div>
-        )}
-        <div className="text-sm">
-          <p className="font-medium text-gray-800">{user.displayName || user.username}</p>
-          <p className="text-xs text-gray-500">@{user.username}</p>
+        <div className="mt-6">
+          <h3 className="text-gray-800 font-semibold mb-3">👥 People With Most Tweets</h3>
+          <ul className="space-y-4">
+            {topUsers.map((user, i) => (
+              <li key={i} className="flex items-center gap-3">
+                {user.profileImage ? (
+                  <img
+                    src={profileService.getFileURL(user.profileImage)}
+                    alt={user.username}
+                    className="w-10 h-10 rounded-full object-cover"
+                  />
+                ) : (
+                  <div className="w-10 h-10 bg-gray-300 rounded-full flex items-center justify-center font-bold text-white">
+                    {user.username?.charAt(0).toUpperCase()}
+                  </div>
+                )}
+                <div className="text-sm">
+                  <p className="font-medium text-gray-800">{user.displayName || user.username}</p>
+                  <p className="text-xs text-gray-500">@{user.username}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
         </div>
-      </li>
-    ))}
-  </ul>
-</div>
 
-
-        {/* Footer Links */}
+        {/* Desktop Footer Links */}
         <div className="border-t pt-4 mt-auto">
           <div className="flex flex-wrap gap-x-2 gap-y-1 text-xs text-gray-400">
             <span className="hover:underline cursor-pointer">Terms</span>
@@ -97,10 +90,22 @@ function Footer() {
             <span className="hover:underline cursor-pointer">About</span>
             <span className="hover:underline cursor-pointer">Help</span>
           </div>
-          <p className="text-xs text-gray-300 mt-2">&copy; 2025 YourAppName</p>
+          <p className="text-xs text-gray-300 mt-2">&copy; 2025 CustomTwitter</p>
         </div>
       </aside>
-    </div>
+
+      {/* ✅ Mobile Footer (only quote + legal links) */}
+      <div className="sm:hidden w-full p-4 bg-white border-t border-gray-200 shadow-inner text-center fixed bottom-0 left-0 right-0 z-50">
+        <p className="text-xs text-gray-500 italic mb-2">“{quote}”</p>
+        <div className="flex flex-wrap justify-center gap-x-3 gap-y-1 text-xs text-gray-400">
+          <span className="hover:underline cursor-pointer">Terms</span>
+          <span className="hover:underline cursor-pointer">Privacy</span>
+          <span className="hover:underline cursor-pointer">Cookies</span>
+          <span className="hover:underline cursor-pointer">About</span>
+          <span className="hover:underline cursor-pointer">Help</span>
+        </div>
+      </div>
+    </>
   );
 }
 

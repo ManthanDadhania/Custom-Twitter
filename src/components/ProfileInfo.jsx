@@ -59,9 +59,10 @@ function ProfileInfo() {
       bio,
       profileImage: imageId,
     });
+
     setProfile(updatedProfile);
     setEditMode(false);
-    setRefreshKey(Date.now()); // Force re-fetch
+    setRefreshKey(Date.now());
 
     if (updatedProfile?.profileImage) {
       const updatedImageURL = profileDetails.getFileURL(updatedProfile.profileImage);
@@ -69,12 +70,18 @@ function ProfileInfo() {
     }
   };
 
-  if (!profile) return <Container><p className="text-center py-10 text-gray-400">Loading profile...</p></Container>;
+  if (!profile) {
+    return (
+      <Container>
+        <p className="text-center py-10 text-gray-400">Loading profile...</p>
+      </Container>
+    );
+  }
 
   return (
     <Container>
-      <div className="max-w-xl mx-auto p-4 border rounded-lg shadow-md bg-white">
-        <div className="flex items-center gap-4">
+      <div className="max-w-xl mx-auto p-4 border rounded-lg shadow-md bg-white mt-4">
+        <div className="flex items-center gap-4 flex-wrap">
           {imageURL ? (
             <img src={imageURL} alt="Profile" className="w-16 h-16 rounded-full object-cover" />
           ) : (
@@ -82,25 +89,27 @@ function ProfileInfo() {
               {username?.charAt(0).toUpperCase() || 'U'}
             </div>
           )}
-          <div>
+          <div className="flex-1">
             {editMode ? (
               <input
-                className="text-lg font-semibold text-gray-800 border border-gray-300 p-1 rounded-md"
+                className="text-lg font-semibold text-gray-800 border border-gray-300 p-2 rounded-md w-full"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
               />
             ) : (
-              <h2 className="text-lg font-semibold text-gray-800">{profile.username}</h2>
+              <h2 className="text-lg font-semibold text-gray-800 break-all">{profile.username}</h2>
             )}
-            <p className="text-sm text-gray-500">@{profile.userId}</p>
+            <p className="text-sm text-gray-500 break-all">@{profile.userId}</p>
           </div>
         </div>
+
         <div className="mt-4">
           {editMode ? (
             <textarea
               className="w-full p-2 border border-gray-300 rounded-md"
               value={bio}
               onChange={(e) => setBio(e.target.value)}
+              placeholder="Write a bio..."
             />
           ) : (
             <p className="text-sm text-gray-700">{profile.bio}</p>
@@ -109,12 +118,12 @@ function ProfileInfo() {
 
         {editMode && (
           <div className="mt-4">
-            <label className="block text-sm font-medium text-gray-700">Profile Image</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Profile Image</label>
             <input type="file" onChange={(e) => setProfileImgFile(e.target.files[0])} />
           </div>
         )}
 
-        <div className="flex gap-2 mt-4">
+        <div className="flex flex-wrap gap-2 mt-4">
           {editMode ? (
             <>
               <Button onClick={handleUpdateProfile} bgColor="bg-green-600">Save</Button>
@@ -127,7 +136,7 @@ function ProfileInfo() {
         </div>
       </div>
 
-      <div className="max-w-xl mx-auto mt-8">
+      <div className="max-w-xl mx-auto mt-8 mb-24">
         <h3 className="text-lg font-bold mb-4 text-gray-700">Your Tweets</h3>
         {tweets.length > 0 ? (
           <div className="space-y-4">

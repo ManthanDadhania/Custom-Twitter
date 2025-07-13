@@ -8,15 +8,14 @@ import Button from '../Button';
 import { useSelector } from 'react-redux';
 import databaseService from '../../appwrite/databaseService';
 import { ID } from 'appwrite';
-import { useNavigate } from 'react-router-dom'; // ✅ for redirecting
+import { useNavigate } from 'react-router-dom';
 
 function TweetForm({ tweet }) {
   const { register, handleSubmit, reset } = useForm();
   const { userData, status } = useSelector((state) => state.auth);
   const [profile, setProfile] = useState(null);
-  const navigate = useNavigate(); // ✅ initialize
+  const navigate = useNavigate();
 
-  // Fetch profile
   useEffect(() => {
     const fetchProfile = async () => {
       if (status && userData?.$id) {
@@ -31,15 +30,11 @@ function TweetForm({ tweet }) {
     fetchProfile();
   }, [status, userData]);
 
-  // Submit tweet
   const submit = async (data) => {
     try {
-      if (!status || !userData?.$id) {
-        return;
-      }
+      if (!status || !userData?.$id) return;
 
       let imageId = null;
-
       if (data.tweetImg && data.tweetImg[0]) {
         const uploaded = await databaseService.uploadFile(data.tweetImg[0]);
         imageId = uploaded?.$id || null;
@@ -61,8 +56,8 @@ function TweetForm({ tweet }) {
         });
       }
 
-      reset();        // clear form
-      navigate('/home');  // ✅ go to homepage
+      reset();
+      navigate('/home');
     } catch (error) {
       console.error("Error submitting tweet:", error);
     }
