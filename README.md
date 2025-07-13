@@ -1,4 +1,4 @@
-# 🐦 Custom Twitter — A Modern X Clone with React & Appwrite
+# 📱 Custom Twitter — A Modern X Clone with React & Appwrite
 
 > A sleek, full-featured Twitter (X) clone powered by **React**, **Redux Toolkit**, **Tailwind CSS**, and **Appwrite**. Tweet, edit, explore profiles, and share media — built for speed and simplicity.
 
