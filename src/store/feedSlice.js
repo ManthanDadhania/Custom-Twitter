@@ -3,7 +3,7 @@ import databaseService from "../appwrite/databaseService";
 import { Query } from "appwrite";
 
 const initialState = {
-  posts: [],       // ✅ store fetched tweets here
+  posts: [],       //Store fetched tweets here
   title: null,
   images: null,
   userId: null,
@@ -12,7 +12,7 @@ const initialState = {
   loading: false,
 };
 
-// ✅ CREATE TWEET
+// CREATE TWEET
 export const createTweet = createAsyncThunk(
   "feed/createTweet",
   async ({ docId, title, images, status, userId }, thunkAPI) => {
@@ -24,7 +24,7 @@ export const createTweet = createAsyncThunk(
   }
 );
 
-// ✅ DELETE TWEET
+// DELETE TWEET
 export const deleteTweet = createAsyncThunk(
   "feed/deleteTweet",
   async (docId, thunkAPI) => {
@@ -36,7 +36,7 @@ export const deleteTweet = createAsyncThunk(
   }
 );
 
-// ✅ UPDATE TWEET
+// UPDATE TWEET
 export const updateTweet = createAsyncThunk(
   "feed/updateTweet",
   async ({ docId, title, images, status, userId }, thunkAPI) => {
@@ -48,12 +48,12 @@ export const updateTweet = createAsyncThunk(
   }
 );
 
-// ✅ GET ALL TWEETS
+// GET ALL TWEETS
 export const getTweets = createAsyncThunk(
   "feed/getTweets",
-  async (_, thunkAPI) => {
+  async (_, thunkAPI) => { // _ represents no parameters
     try {
-      return await databaseService.getPosts(); // already filtered inside your service
+      return await databaseService.getPosts(); 
     } catch (error) {
       return thunkAPI.rejectWithValue("Failed to fetch Tweets.");
     }
@@ -78,7 +78,7 @@ const feedSlice = createSlice({
         state.images = action.payload.images;
         state.status = action.payload.status;
         state.userId = action.payload.userId;
-        state.posts.unshift(action.payload); // optional: add new tweet to top
+        state.posts.unshift(action.payload); 
       })
       .addCase(createTweet.rejected, (state, action) => {
         state.loading = false;
@@ -124,7 +124,7 @@ const feedSlice = createSlice({
       .addCase(getTweets.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
-        state.posts = action.payload.documents || []; // Appwrite returns {documents: [...]}
+        state.posts = action.payload.documents || []; 
       })
       .addCase(getTweets.rejected, (state, action) => {
         state.loading = false;

@@ -24,7 +24,7 @@ function Footer() {
 
   return (
     <>
-      {/* ✅ Desktop Sidebar */}
+      {/* Desktop Sidebar */}
       <aside className="hidden sm:flex fixed right-0 top-0 h-screen w-[300px] p-4 border-l border-gray-200 bg-white overflow-y-auto shadow-inner z-10 flex-col">
         {/* Search */}
         <div className="relative mb-6">
@@ -94,7 +94,7 @@ function Footer() {
         </div>
       </aside>
 
-      {/* ✅ Mobile Footer (only quote + legal links) */}
+      {/* Mobile Footer (only quote + legal links) */}
       <div className="sm:hidden w-full p-4 bg-white border-t border-gray-200 shadow-inner text-center fixed bottom-0 left-0 right-0 z-50">
         <p className="text-xs text-gray-500 italic mb-2">“{quote}”</p>
         <div className="flex flex-wrap justify-center gap-x-3 gap-y-1 text-xs text-gray-400">

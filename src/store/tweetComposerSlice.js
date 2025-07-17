@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { createTweet } from "./feedSlice"; // assuming this posts the tweet
+import { createTweet } from "./feedSlice"; 
 
 const initialState = {
   text: "",

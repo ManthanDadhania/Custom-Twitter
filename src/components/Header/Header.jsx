@@ -48,7 +48,7 @@ function Header() {
 
           setProfile(profile);
         } catch (err) {
-          console.error('🚫 Failed to fetch/create profile:', err);
+          console.error('Failed to fetch/create profile:', err);
         }
       }
     };

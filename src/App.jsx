@@ -28,7 +28,7 @@ function App() {
     fetchUser();
   }, [dispatch]);
 
-  // ✅ Detect scroll to bottom
+  // Detect scroll to bottom
   useEffect(() => {
     const handleScroll = () => {
       const scrollY = window.scrollY;
@@ -66,7 +66,7 @@ function App() {
         <Footer />
       </div>
 
-      {/* ✅ Mobile Footer: shown only when scrolled to bottom */}
+      {/* Mobile Footer: shown only when scrolled to bottom */}
       {showMobileFooter && (
         <div className="fixed bottom-0 left-0 w-full bg-white sm:hidden shadow-md z-50 border-t">
           <Footer />

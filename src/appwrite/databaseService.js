@@ -57,22 +57,22 @@ class DatabaseService {
         }
     }
 
-   async getPosts() {
-  try {
-    return await this.database.listDocuments(
-      conf.appwriteDatabaseId,
-      conf.appwriteCollectionId,
-      [
-        Query.equal("status", "active"),
-        Query.orderDesc('$createdAt'),
-        Query.limit(100)
-      ]
-    );
-  } catch (error) {
-    console.log("Error in DatabaseService :: Fetching all Posts", error);
-    return false;
-  }
-}
+    async getPosts() {
+        try {
+            return await this.database.listDocuments(
+                conf.appwriteDatabaseId,
+                conf.appwriteCollectionId,
+                [
+                    Query.equal("status", "active"),
+                    Query.orderDesc('$createdAt'),
+                    Query.limit(100)
+                ]
+            );
+        } catch (error) {
+            console.log("Error in DatabaseService :: Fetching all Posts", error);
+            return false;
+        }
+    }
 
 
     async uploadFile(file) {
@@ -94,7 +94,7 @@ class DatabaseService {
     getFileURL(fileId) {
         try {
             const url = this.storage.getFileDownload(conf.appwriteBucketId, fileId);
-            return typeof url === 'string' ? url : url?.href ?? '';
+            return typeof url === 'string' ? url : url?.href ?? ''; 
 
         } catch (error) {
             console.error("Error generating file preview URL", error);
